@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proste Webki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary-color: #333333; /* Changed from blue to dark gray */
+    --secondary-color: #FFFFFF;
+    --text-color: #333333;
+    --accent-color: #FF6F61;
+    --font-family: 'Montserrat', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-family); color: var(--text-color); background: var(--secondary-color); line-height: 1.6; }
+  header { background: #ffffff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+  .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; }
+  nav img { height: 40px; }
+  nav ul { list-style: none; display: flex; gap: 1rem; }
+  nav ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+    position: relative;
+    transition: color 0.3s;
+  }
+  nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -3px;
+    left: 0;
+    background-color: var(--accent-color);
+    transition: width 0.3s;
+  }
+  nav ul li a:hover {
+    color: var(--accent-color);
+  }
+  nav ul li a:hover::after {
+    width: 100%;
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1rem 0;
+    background: url('placeholder-hero.png') center/cover no-repeat;
+    color: #ffffff;
+    height: 50vh;
+    min-height: 250px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    opacity: 0;
+    animation: fadeInDown 1s forwards;
+  }
+  .hero-content h1 { font-size: 1.85rem; margin-bottom: 0.5rem; }
+  .hero-content p { font-size: 1rem; margin-bottom: 0.75rem; }
+  .btn {
+    display: inline-block;
+    background: var(--accent-color);
+    color: #fff;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.3s;
+    font-size: 0.85rem;
+  }
+  .btn:hover {
+    background: #e5574e;
+    transform: translateY(-3px);
+  }
+
+  /* Sections */
+  section { padding: 3rem 0; }
+  .about .container,
+  .services .container,
+  .portfolio .container,
+  .contact .container { text-align: center; }
+
+  .about { background: var(--secondary-color); }
+  .services, .portfolio { background: #f9f9f9; }
+
+  .services .grid, .portfolio .grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  .service-item, .portfolio-item {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: transform 0.6s, opacity 0.6s;
+  }
+  .service-item.visible, .portfolio-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .service-item img, .portfolio-item img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: contain;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+
+  .portfolio-item {
+    text-decoration: none;
+    color: var(--text-color);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .portfolio-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    color: var(--accent-color);
+  }
+
+  /* Contact */
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .contact-info a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+  }
+  .contact-info a:hover {
+    color: var(--accent-color);
+  }
+
+  /* Footer */
+  footer {
+    background: #333333;
+    color: #ffffff;
+    padding: 2rem 0;
+    text-align: center;
+  }
+
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <img src="placeholder-logo.png" alt="Logo Proste Webki">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">O nas</a></li>
+          <li><a href="#services">Usługi</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#contact">Kontakt</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="container hero-content">
+      <h1>Tworzymy proste i funkcjonalne strony</h1>
+      <p>Pomagamy małym lokalnym przedsiębiorstwom zaistnieć w sieci. Szybko, estetycznie i bez zbędnych komplikacjach.</p>
+      <a href="#contact" class="btn">Skontaktuj się</a>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="container">
+      <h2 class="fade-in-element">O nas</h2>
+      <p class="fade-in-element">Jesteśmy niewielkim, ale ambitnym zespołem pasjonatów web designu, którzy wierzą, że mniej znaczy więcej. Naszym celem jest tworzenie stron internetowych, które są nie tylko estetyczne, ale przede wszystkim funkcjonalne i intuicyjne w obsłudze.
+
+Specjalizujemy się w minimalistycznym designie – stawiamy na przejrzystość, czytelność i elegancję. Dzięki temu strony, które tworzymy, są szybkie, lekkie i doskonale dostosowane do urządzeń mobilnych.
+
+Zależy nam na satysfakcji klienta, dlatego regularnie kontaktujemy się z klientem na etapie tworzenia Wierzymy, że dobra strona internetowa powinna działać cicho w tle, bezproblemowo spełniając swoją funkcję.
+
+</p>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="container">
+      <h2 class="fade-in-element">Proces Tworzenia</h2>
+      <div class="grid">
+        <div class="service-item">
+          <img src="placeholder-service1.png" alt="Projektowanie">
+          <h3>Projektowanie stron</h3>
+          <p>Responsywne layouty dostosowane do urządzeń mobilnych.</p>
+        </div>
+        <div class="service-item">
+          <img src="placeholder-service2.png" alt="Wdrożenie">
+          <h3>Wdrożenie</h3>
+          <p>Przystępujemy do pracy nad projektem zgodnie z zaleceniami klienta</p>
+        </div>
+        <div class="service-item">
+          <img src="placeholder-service3.png" alt="Wsparcie">
+          <h3>Wsparcie techniczne</h3>
+          <p>Poprawki, kopie zapasowe i konsultacje w celu dopięcia wszystkiego na ostani guzik</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <h2 class="fade-in-element">Przykładowe Szablony</h2>
+      <div class="grid">
+        <a href="stronahotel/index.html" class="portfolio-item">
+          <img src="placeholder-portfolio1.png" alt="Projekt 1">
+          <h4>Pensjonat w górach</h4>
+        </a>
+        <a href="warsztatsamochodowy/index.html" class="portfolio-item">
+          <img src="placeholder-portfolio2.png" alt="Projekt 2">
+          <h4>Warsztat Samochodowy</h4>
+        </a>
+        <a href="elektrostatyczne/index.html" class="portfolio-item">
+          <img src="placeholder-portfolio3.png" alt="Projekt 3">
+          <h4>Usługi Telekomunikacyjne</h4>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2 class="fade-in-element">Kontakt</h2>
+      <div class="contact-info">
+        <a href="mailto:prostewebki@gmail.com">prostewebki@gmail.com</a>
+        <a href="tel:+48123456789">+48 731 711 908</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Proste Webki. Wszelkie prawa zastrzeżone.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Scroll reveal for elements
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.service-item, .portfolio-item, .fade-in-element').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

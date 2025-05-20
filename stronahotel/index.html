@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumière Retreat - Elegancki Pensjonat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4A3F35;
+            --secondary-color: #B99976;
+            --accent-color: #E8D8C4;
+            --light-beige: #F5F1ED;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.7;
+            color: var(--primary-color);
+            background-color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Nagłówek */
+        header {
+            background: var(--light-beige);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: var(--primary-color);
+        }
+
+        .logo span {
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 300;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--secondary-color);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Sekcje */
+        section {
+            padding: 120px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(245, 241, 237, 0.9), rgba(245, 241, 237, 0.9)),
+                        url('https://source.unsplash.com/8A7fD6Y5VF4/1920x1280') center/cover;
+            text-align: center;
+            padding-top: 180px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        /* Sekcja O nas */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-image {
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            padding: 25px;
+            background: var(--light-beige);
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .feature-item i {
+            font-size: 32px;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        /* Galeria */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            aspect-ratio: 1/0.7;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Cennik */
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 50px;
+        }
+
+        .pricing-table th, .pricing-table td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--accent-color);
+        }
+
+        .pricing-table th {
+            background-color: var(--secondary-color);
+            color: white;
+            font-weight: 400;
+        }
+
+        .pricing-table tr:nth-child(even) {
+            background-color: var(--light-beige);
+        }
+
+        /* Kontakt */
+        .contact-box {
+            background: var(--light-beige);
+            padding: 50px;
+            border-radius: 10px;
+            margin-top: 50px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .contact-item i {
+            font-size: 28px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .map-container {
+            height: 400px;
+            margin-top: 50px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Responsywność */
+        @media (max-width: 992px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .contact-box {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Typografia */
+        h2.section-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 60px;
+            letter-spacing: 1px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #5a5a5a;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">LUMIÈRE<span> Retreat</span></div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">O nas</a>
+                <a href="#gallery">Galeria</a>
+                <a href="#pricing">Cennik</a>
+                <a href="#contact">Kontakt</a>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Wyrafinowany Wypoczynek<br>w Sercu Natury</h1>
+            <p style="max-width: 600px; margin: 0 auto 30px;">Od 2005 roku łączymy nowoczesny design z naturalnym pięknem Podhala</p>
+            <a href="#contact" class="btn">Sprawdź Dostępność</a>
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <h2 class="section-title">O Naszym Pensjonacie</h2>
+        <div class="about-grid">
+            <div class="about-image">
+                <img src="https://cdn.pixabay.com/photo/2017/06/02/08/16/winter-2365654_960_720.jpg" alt="Wnętrze pensjonatu">
+            </div>
+            <div>
+                <p>Założony z pasją do detalu i miłością do górskiego krajobrazu, LUMIÈRE Retreat to więcej niż miejsce noclegowe - to doświadczenie. Nasz zespół architektów współpracował z lokalnymi rzemieślnikami, by stworzyć przestrzeń łączącą współczesny minimalizm z tradycyjnymi materiałami.</p>
+                <div class="about-features">
+                    <div class="feature-item">
+                        <i class="fas fa-tree"></i>
+                        <h3>Eko Design</h3>
+                        <p>Materiały z recyklingu, energia odnawialna, naturalne tekstylia</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-utensils"></i>
+                        <h3>Kuchnia Regionalna</h3>
+                        <p>Śniadania z lokalnych produktów, degustacje serów owczych</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-spa"></i>
+                        <h3>Wellness</h3>
+                        <p>Sauna fińska, masaże relaksacyjne, joga na tarasie</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-hiking"></i>
+                        <h3>Przewodnicy</h3>
+                        <p>Organizacja wycieczek z certyfikowanymi przewodnikami górskimi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="container">
+        <h2 class="section-title">Nasza Przestrzeń</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://cdn.pixabay.com/photo/2014/05/26/21/01/roof-terrace-354906_960_720.jpg" alt="Taras widokowy">
+            </div>
+            <div class="gallery-item">
+                <img src="https://cdn.pixabay.com/photo/2020/02/19/21/16/bath-4863333_960_720.jpg" alt="Strefa SPA">
+            </div>
+            <div class="gallery-item">
+                <img src="https://cdn.pixabay.com/photo/2021/02/08/12/40/lasagna-5994612_960_720.jpg" alt="Restauracja">
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="container">
+        <h2 class="section-title">Pakety Pobytowe</h2>
+        <table class="pricing-table">
+            <tr>
+                <th>Pokój</th>
+                <th>Opis</th>
+                <th>Cena/noc</th>
+                <th>Dodatki</th>
+            </tr>
+            <tr>
+                <td>Górski Apartament</td>
+                <td>65m² z widokiem na Tatry, kominek, aneks kuchenny</td>
+                <td>890 zł</td>
+                <td>Darmowe SPA, parking podziemny</td>
+            </tr>
+            <tr>
+                <td>Loft Designerski</td>
+                <td>45m² industrialny design, wanna z hydromasażem</td>
+                <td>690 zł</td>
+                <td>Śniadanie w pokoju, pralnia</td>
+            </tr>
+            <tr>
+                <td>Pokój Premium</td>
+                <td>35m² z balkonem, łazienka marmurowa</td>
+                <td>490 zł</td>
+                <td>Dostęp do strefy wellness</td>
+            </tr>
+        </table>
+    </section>
+
+    <section id="contact" class="container">
+        <h2 class="section-title">Kontakt</h2>
+        <div class="contact-box">
+            <div class="contact-item">
+                <i class="fas fa-map-marked-alt"></i>
+                <h3>Adres</h3>
+                <p>ul. Pod Reglami 45<br>34-500 Zakopane</p>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-clock"></i>
+                <h3>Godziny Recepcji</h3>
+                <p>Pon-Ndz: 7:00-22:00<br>Całodobowe check-in</p>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone-volume"></i>
+                <h3>Telefon</h3>
+                <p>+48 123 456 789<br>+48 987 654 321</p>
+            </div>
+        </div>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d51364.1381971106!2d19.920369641796863!3d49.27596950000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4715e5b9874e7d0f%3A0xcb9bdb9c9e5e4c0c!2sZakopane!5e0!3m2!1spl!2spl!4v1717244440959!5m2!1spl!2spl" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+            </iframe>
+        </div>
+    </section>
+
+    <script>
+        // Animacja sekcji
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Płynne przewijanie
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
